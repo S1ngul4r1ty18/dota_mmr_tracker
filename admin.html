@@ -1,0 +1,33 @@
+<!-- LOCAL DO ARQUIVO: templates/admin.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container admin-container">
+        <div class="admin-header">
+            <h1>Gestão de Usuários</h1>
+            <a href="{{ url_for('admin_logout') }}" class="link-button logout">Sair</a>
+        </div>
+        <p id="admin-message" class="message"></p>
+        <div class="admin-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nickname</th>
+                        <th>Alterar Nick</th>
+                        <th>Alterar Senha</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="users-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

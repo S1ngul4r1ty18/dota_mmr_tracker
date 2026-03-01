@@ -1,0 +1,27 @@
+<!-- LOCAL DO ARQUIVO: templates/estatisticas.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Estatísticas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Suas Estatísticas</h1>
+        
+        <h2>Performance de MMR (Manual)</h2>
+        <div id="local-stats-container">Carregando...</div>
+        
+        <hr>
+        
+        <h2>Performance em Partidas (Últimas 20)</h2>
+        <div id="recent-stats-container">Carregando...</div>
+        
+        <div class="button-group">
+            <a href="/dashboard" class="link-button">Voltar</a>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/estatisticas.js') }}"></script>
+</body>
+</html>

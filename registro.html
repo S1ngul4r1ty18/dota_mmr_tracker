@@ -1,0 +1,95 @@
+<!-- LOCAL DO ARQUIVO: templates/registro.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Acesso - Dota 2 MMR Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container login-register-container">
+        
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="login">Acessar</button>
+            <button class="tab-button" data-tab="registro">Registrar</button>
+        </div>
+
+        <!-- LOGIN -->
+        <div id="login-form-container" class="form-container tab-pane active">
+            <h2>Acesse sua Conta</h2>
+            <form id="login-form">
+                <label for="nickname_login">Nickname:</label>
+                <input type="text" id="nickname_login" required>
+                <label for="password_login">Senha:</label>
+                <input type="password" id="password_login" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <p id="login-error-message" class="error"></p>
+        </div>
+
+        <!-- REGISTRO -->
+        <div id="register-form-container" class="form-container tab-pane">
+            <h2>Novo Registro</h2>
+            <form id="registro-form">
+                <label for="nickname">Nickname:</label>
+                <input type="text" id="nickname" required>
+                <label for="user_id_registro">Steam ID (32-bit):</label>
+                <input type="number" id="user_id_registro" required placeholder="Ex: 119934420">
+                <label for="mmr_inicial">MMR Inicial:</label>
+                <input type="number" id="mmr_inicial" required>
+                <label for="password_registro">Senha:</label>
+                <input type="password" id="password_registro" required>
+                <button type="submit">Criar Conta</button>
+            </form>
+            <p id="registro-error-message" class="error"></p>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de abas e envio
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            tabs.forEach(t => t.addEventListener('click', () => {
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+                t.classList.add('active');
+                if(t.dataset.tab === 'login') document.getElementById('login-form-container').classList.add('active');
+                else document.getElementById('register-form-container').classList.add('active');
+            }));
+
+            const handleAuth = async (url, body, errorEl) => {
+                try {
+                    const res = await fetch(url, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(body)
+                    });
+                    const json = await res.json();
+                    if(json.success) window.location.href = json.redirect;
+                    else errorEl.textContent = json.message;
+                } catch(e) {
+                    errorEl.textContent = "Erro de conexão.";
+                }
+            };
+
+            document.getElementById('login-form').addEventListener('submit', e => {
+                e.preventDefault();
+                handleAuth('/api/login', {
+                    nickname: document.getElementById('nickname_login').value,
+                    password: document.getElementById('password_login').value
+                }, document.getElementById('login-error-message'));
+            });
+
+            document.getElementById('registro-form').addEventListener('submit', e => {
+                e.preventDefault();
+                handleAuth('/api/register', {
+                    nickname: document.getElementById('nickname').value,
+                    id: document.getElementById('user_id_registro').value,
+                    mmr_inicial: document.getElementById('mmr_inicial').value,
+                    password: document.getElementById('password_registro').value
+                }, document.getElementById('registro-error-message'));
+            });
+        });
+    </script>
+</body>
+</html>

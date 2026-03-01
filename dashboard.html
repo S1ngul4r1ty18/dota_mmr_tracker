@@ -1,0 +1,41 @@
+<!-- LOCAL DO ARQUIVO: templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - {{ user.nickname }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Olá, {{ user.nickname }}</h1>
+        <p>Steam ID: {{ user.id }}</p>
+
+        <div class="stats">
+            <div id="mmr-atual">Buscando dados...</div>
+        </div>
+
+        <div class="actions">
+            <form id="update-mmr-form" class="form-update">
+                <label for="mmr_atualizado">Atualizar MMR (Manual):</label>
+                <input type="number" id="mmr_atualizado" placeholder="Novo valor de MMR" required>
+                <button type="submit">Salvar</button>
+            </form>
+            <p id="update-message" class="message"></p>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="mmrChart"></canvas>
+        </div>
+
+        <div class="button-group">
+            <a href="/historico" class="link-button">Histórico</a>
+            <a href="/estatisticas" class="link-button">Estatísticas</a>
+            <a href="/recordes" class="link-button">Recordes</a>
+            <a href="/logout" class="link-button logout">Sair</a>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

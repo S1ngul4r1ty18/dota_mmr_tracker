@@ -1,0 +1,24 @@
+<!-- LOCAL DO ARQUIVO: templates/recordes.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Recordes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Recordes Pessoais</h1>
+        <p>Baseado no seu histórico cacheado.</p>
+        
+        <div id="records-container">
+            <p>Calculando...</p>
+        </div>
+        
+        <div class="button-group">
+            <a href="/dashboard" class="link-button">Voltar</a>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/recordes.js') }}"></script>
+</body>
+</html>

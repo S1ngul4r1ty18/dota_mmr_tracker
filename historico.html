@@ -1,0 +1,24 @@
+<!-- LOCAL DO ARQUIVO: templates/historico.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Histórico</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Histórico de Partidas</h1>
+        <p>Dados combinados: Cache Local + OpenDota</p>
+        
+        <div id="historico-partidas">
+            <p>Carregando...</p>
+        </div>
+        
+        <div class="button-group">
+            <a href="/dashboard" class="link-button">Voltar</a>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/historico.js') }}"></script>
+</body>
+</html>
